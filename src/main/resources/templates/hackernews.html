@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Hacker News</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      text-align: center;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: inline-block;
+      text-align: left;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    input[type="radio"] {
+      margin-right: 10px;
+    }
+
+    input[type="submit"] {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #45a049;
+    }
+
+    .results {
+      margin-top: 30px;
+      text-align: left;
+    }
+
+    .results-header {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .result-item {
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .result-title {
+      font-size: 16px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .result-url {
+      color: #4CAF50;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Hacker News</h1>
+    
+    <form action="/hackernews" method="post">
+        <input type="text" name="query" placeholder="Enter your search query" required>
+        <br><br>
+        <label>
+          <input type="radio" name="searchType" value="stories" checked> Search Stories
+        </label>
+        <label>
+          <input type="radio" name="searchType" value="users"> Search Users
+        </label>
+        <br><br>
+        <input type="submit" value="Search">
+      </form>
+
+    <div class="results">
+      <h2 class="results-header">Search Results</h2>
+      <div th:each="result : ${searchResults}" class="result-item">
+        <p class="result-title" th:text="${result.title}"></p>
+        <a class="result-url" th:href="${result.url}" th:text="${result.url}"></a>
+        <p class="result-text" th:text="${result.text}"></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

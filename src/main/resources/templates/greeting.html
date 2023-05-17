@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>GOOGOL</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+    
+        form {
+            margin: 0 auto;
+            width: 300px;
+            text-align: center;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+        }
+    
+        input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+    
+        button[type="submit"] {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    
+        #successMessage {
+            display: none;
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Index a Link</h1>
+    <form id="urlForm">
+        <label for="urlInput">Enter URL:</label>
+        <input type="text" id="urlInput" required>
+        <br><br>
+        <button type="submit">Send</button>
+    </form>
+    
+    <div id="successMessage">Success!</div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#urlForm').submit(function(event) {
+                event.preventDefault(); // Prevent form submission
+    
+                var url = $('#urlInput').val(); // Get the entered URL
+    
+                // Perform an AJAX request to send the URL to the controller
+                $.ajax({
+                    type: 'POST',
+                    url: '/processUrl',
+                    data: {url: url},
+                });
+                var success = true;
+    
+                if (success) {
+                    $('#successMessage').show(); // Display the success message
+                    $('#urlInput').val(''); // Clear the input field
+                }
+            });
+        });
+    </script>
+</body>
+</html>

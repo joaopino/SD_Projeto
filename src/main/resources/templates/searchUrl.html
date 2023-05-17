@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search URL Page</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        /* Increase the input field size */
+        input[type="text"] {
+            width: 300px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Linked URLs Page</h1>
+    <form th:action="@{/searchurl}" method="post">
+        <label for="URL">Enter URL:</label>
+        <input type="text" name="urlinput" placeholder="Enter your URL here" />
+        <button type="submit">Search</button>
+    </form>
+    <br/>
+    <table>
+        <thead>
+            <tr>
+                <th>Result</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="result : ${searchUrlResults}">
+                <td colspan="3">
+                    <p th:text="${result}"></p>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
